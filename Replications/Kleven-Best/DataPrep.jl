@@ -173,6 +173,11 @@ for i = 1:ntop
     z[i] = exp(5 + ((i-1) * (11.52/(ntop-1))))
 end;
 
+# Define η (from hamiltonian.agedep.m, easier to do here)
+ω0prime = diff(ω0) ./ diff(n);
+push!(ω0prime, ω0prime[end]);
+η = dtapars.d .+ (ω0prime .* n ./ ω0);
+
 # Create a struct of data primitives to return (when modularized)
 @with_kw struct Prims_struct
     z
@@ -183,8 +188,9 @@ end;
     γ
     d
     e
+    η
 end;
 
-prims = Prims_struct(z, n, ω0, fn, ntop, dtapars.γ, dtapars.d, dtapars.e)
+prims = Prims_struct(z, n, ω0, fn, ntop, dtapars.γ, dtapars.d, dtapars.e, η)
 
 end
