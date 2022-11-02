@@ -20,7 +20,7 @@ ndta = size(dta)[1]; # Data size
 rename!(dta, [:z, :Hzy, :hzy, :Hzo, :hzo, :mtrz, :ω, :jω, :Jω, :dtapars]);
 
 # Add a struct of parameters from the data
-@with_kw struct dta_params
+@with_kw struct Dta_params
     e
     d ::Float64 = 0 # Benchmark scenario where δ=0
     zymin
@@ -31,7 +31,7 @@ rename!(dta, [:z, :Hzy, :hzy, :Hzo, :hzo, :mtrz, :ω, :jω, :Jω, :dtapars]);
     R ::Int64 = 4000
 end;
 
-dtapars = dta_params(e = dta.dtapars[1],
+dtapars = Dta_params(e = dta.dtapars[1],
                      zymin = dta.dtapars[2],
                      αzy = dta.dtapars[3],
                      zomin = dta.dtapars[4],
@@ -117,7 +117,7 @@ zoznew = [zoz[1:nz1]; zohigh];
 # Compute ω_0, make ω_0 monotonic, and smooth ω_0
 ω0 = copy(ωz);
 ω0 = make_monotone(ωz);
-ω0 = smooth_dist(ω0, 2000)
+ω0 = smooth_dist(ω0, 2000);
 
 # Compute ω_0, make ω_0 monotonic, and smooth ω_0
 ω0 = copy(ωz);
@@ -174,7 +174,7 @@ for i = 1:ntop
 end;
 
 # Create a struct of data primitives to return (when modularized)
-@with_kw struct prims_struct
+@with_kw struct Prims_struct
     z
     n
     ω0
@@ -183,8 +183,8 @@ end;
     γ
     d
     e
-end
+end;
 
-prims = prims_struct(z, n, ω0, fn, ntop, dtapars.γ, dtapars.d, dtapars.e)
+prims = Prims_struct(z, n, ω0, fn, ntop, dtapars.γ, dtapars.d, dtapars.e)
 
 end
