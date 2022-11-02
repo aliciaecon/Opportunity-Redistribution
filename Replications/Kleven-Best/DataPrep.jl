@@ -181,8 +181,10 @@ end;
     fn
     ntop
     γ
+    d
+    e
 end
 
-prims = prims_struct(z, n, ω0, fn, ntop, dtapars.γ)
+prims = prims_struct(z, n, ω0, fn, ntop, dtapars.γ, dtapars.d, dtapars.e)
 
 end
