@@ -168,7 +168,7 @@ fn = fnnew / Fnnew[ntop];
 Fn = Fnnew / Fnnew[ntop];
 
 # Squeeze the top of the z grid (clarify?)
-z = zeros(ntop, 1);
+z = zeros(ntop);
 for i = 1:ntop
     z[i] = exp(5 + ((i-1) * (11.52/(ntop-1))))
 end;
